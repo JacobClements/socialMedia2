@@ -9,8 +9,6 @@ export class FirebaseAuthService {
 
   constructor(public firebaseAuth: AngularFireAuth, public db: AngularFireDatabase) { }
 
-  
-
   isLoggedIn: boolean = false;
 
   async signInWithEmailAndPassword(email: string, password: string){

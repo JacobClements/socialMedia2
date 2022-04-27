@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { FirebaseAuthService } from '../firebase-auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -8,7 +9,7 @@ import { NgForm } from '@angular/forms';
 })
 export class SignupComponent implements OnInit {
 
-  constructor() { }
+  constructor(private firebaseAuth: FirebaseAuthService) { }
 
   isSignUp: boolean = true;
 
@@ -16,7 +17,8 @@ export class SignupComponent implements OnInit {
   }
 
   signUp(form: any){
-
+    // this.firebaseAuth.signUp(form.email, form.password);
+    console.log(form.email, form.password)
   }
 
 }

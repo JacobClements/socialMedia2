@@ -17,7 +17,7 @@ export class SignupComponent implements OnInit {
   }
 
   signUp(form: any){
-    this.firebaseAuth.signUp(form.email, form.password);
+    this.firebaseAuth.signUp(form.email, form.password, form.name);
   }
 
   signIn(form: any){

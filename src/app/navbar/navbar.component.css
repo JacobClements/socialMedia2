@@ -31,7 +31,7 @@
     width: 70%;
   } @media(max-width: 768px) {
       .nav-wrapper {
-        width: 90%;
+        width: 100%;
       }
     } @media(max-width: 638px) {
         .nav-wrapper {
@@ -262,6 +262,9 @@
     }
   }
   
+  .wrapper {
+    overflow: hidden;
+  }
   
   /*======================================================
                      Responsive Mobile Menu 
@@ -273,14 +276,18 @@
     align-items: center;
     justify-content: center;
     position: absolute;
-    top: 0;
+    top: 60px;
     right: 0;
     padding-right: 15px;
-    transform: translateX(-100%);
     width: 100vw;
-    height: 100vh;
+    height: 80%;
+    z-index: 1000;
     -webkit-transition: transform 0.2s ease-out;
     transition: transform 0.2s ease-out;
+  }
+
+  .hidden {
+    display: none;
   }
   
   .overlay-menu ul, .overlay-menu li {

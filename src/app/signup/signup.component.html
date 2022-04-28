@@ -45,4 +45,7 @@
             </div>
         </div>
     </div>
+
+<div *ngIf="this.firebaseAuth.user as user"> {{user.displayName}}  {{user.email}}</div>
+
 </body>

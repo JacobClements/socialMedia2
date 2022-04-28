@@ -9,7 +9,7 @@ import { FirebaseAuthService } from '../firebase-auth.service';
 })
 export class SignupComponent implements OnInit {
 
-  constructor(private firebaseAuth: FirebaseAuthService) { }
+  constructor(public firebaseAuth: FirebaseAuthService) { }
 
   isSignUp: boolean = true;
 

@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.css';
+
 body {
     animation: move 10s ease infinite;
     background: linear-gradient(45deg, #49D49D 10%, #A2C7E5 90%);

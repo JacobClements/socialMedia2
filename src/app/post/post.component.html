@@ -1,0 +1,14 @@
+<div class="card">
+    <h5>Make a Post</h5>
+
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+        <label> Title </label>
+        <input ngModel name="title" #title="ngModel" type="text">
+
+        <label> Description </label>
+        <input ngModel name="description" #description="ngModel" type="text">
+
+        <button class="btn btn-primary">POST</button>
+
+    </form>
+</div>

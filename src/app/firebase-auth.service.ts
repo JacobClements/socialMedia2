@@ -1,30 +1,33 @@
 import { Injectable, NgZone } from '@angular/core';
-import { User } from './user';
 import * as auth from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import {
-  AngularFirestore,
-  AngularFirestoreDocument,
-} from '@angular/fire/compat/firestore';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { AngularFirestore, AngularFirestoreCollection,  AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import { User } from './Models/User';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseAuthService {
 
-  constructor(public firebaseAuth: AngularFireAuth, public db: AngularFireDatabase) { 
+  constructor(public firebaseAuth: AngularFireAuth, public afs: AngularFirestore) { 
     this.firebaseAuth.authState.subscribe((user) => {
       if (user){
         this.user = user;
       }
     })
+
+    this.usersCollection = this.afs.collection<User>('users');
+
+
+
   }
 
   isLoggedIn: boolean = false;
-  firebase = this.db.database.app;
 
   user: any; // User that is logged in
+  usersCollection: AngularFirestoreCollection<User> | undefined;
+
 
   async signInWithEmailAndPassword(email: string, password: string){
     await this.firebaseAuth.signInWithEmailAndPassword(email, password).then(res => {
@@ -42,8 +45,8 @@ export class FirebaseAuthService {
       res.user?.updateProfile({
         displayName: name
       })
-
-      this.addUserToDatabase(name, res.user?.uid != undefined ? res.user.uid : "");
+      
+      if(res.user != null) this.addUserToFirestore(res?.user);
     })
   }
 
@@ -52,32 +55,35 @@ export class FirebaseAuthService {
     this.isLoggedIn = false;
   }
 
-    // Send email verfificaiton when new user sign up
-    SendVerificationMail() {
-      return this.firebaseAuth.currentUser
-        .then((u: any) => u.sendEmailVerification())
-        .then(() => {
-          window.alert("Yay")
-        });
-    }
-    // Reset Forggot password
-    ForgotPassword(passwordResetEmail: string) {
-      return this.firebaseAuth
-        .sendPasswordResetEmail(passwordResetEmail)
-        .then(() => {
-          window.alert('Password reset email sent, check your inbox.');
-        })
-        .catch((error) => {
-          window.alert(error);
-        });
-    }
-  
-
-  private addUserToDatabase(name: string, UserId: string){
-    this.db.list("/Users").push({
-      name: name,
-      uid: UserId
+  addUserToFirestore(user: firebase.default.User){
+    if (user.displayName != null && user.email != null){
+      this.usersCollection?.doc(user.uid).set({
+        displayName: user.displayName,
+        email: user.email,
+        profileURL: "",
     })
+    }
+
   }
 
+  // Send email verfificaiton when new user sign up
+  SendVerificationMail() {
+    return this.firebaseAuth.currentUser
+      .then((u: any) => u.sendEmailVerification())
+      .then(() => {
+        window.alert("Yay")
+      });
+  }
+  // Reset Forggot password
+  ForgotPassword(passwordResetEmail: string) {
+    return this.firebaseAuth
+      .sendPasswordResetEmail(passwordResetEmail)
+      .then(() => {
+        window.alert('Password reset email sent, check your inbox.');
+      })
+      .catch((error) => {
+        window.alert(error);
+      });
+  }
+  
 }

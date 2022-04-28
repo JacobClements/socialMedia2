@@ -15,13 +15,17 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from 'src/environments/environment';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ProfileComponent } from './profile/profile.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { PostComponent } from './post/post.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignupComponent,
     NavbarComponent,
-    ProfileComponent
+    ProfileComponent,
+    DashboardComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,

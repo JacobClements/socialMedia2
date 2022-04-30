@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../Models/User';
 import { Post } from '../Models/Post';
 import { PostService } from '../post.service';
+import { UserService } from '../user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,13 +12,21 @@ import { PostService } from '../post.service';
 })
 export class DashboardComponent implements OnInit {
   posts: Post[] = [];
+  users: User[] = [];
 
-  constructor(private postService: PostService) { }
+  constructor(private postService: PostService, private userService: UserService, private Router: Router) { }
 
   ngOnInit(): void {
-    this.postService.getPosts().subscribe(x => {
-      this.posts = x;
-    })
+
+    
+  }
+
+  removePost(post: Post){
+    this.postService.deletePost(post);
+  }
+
+  goToUserProfile(user: User){
+    this.Router.navigate(['profile'], {state: {user: user}})
   }
 
 }

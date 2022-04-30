@@ -1,0 +1,35 @@
+<div class="card">
+    <header>
+        <div class="left-header">
+            <div>
+                <img  alt="img" src="assets/images/no_image.png" />
+            </div>
+            <div class="text">
+                <div class="name" style="font-weight: bold;">{{userName}}</div>
+                <div class="timeposted">{{date}}</div>
+            </div>
+            
+        </div>
+
+        <div class="right-header">
+            <button class="follow-base" (click)="onFollowPressed()" [class.follow]="!following" [class.following]="following">Follow</button>
+        </div>
+        
+       
+    </header>
+    <hr>
+    <div class="body">
+
+        <h3 class="title">{{title}}</h3>
+        <div class="message"> {{message | truncate:250}}</div>
+    </div>
+    
+    <hr>
+    <footer>
+
+        <div class="like"><i class="fa fa-heart"></i>0</div>
+        <div class="comment"><i class="fa fa-comments">0</i></div>
+        <div class="dots"><i class="fa fa-bars"></i></div>
+    </footer>
+    
+</div>

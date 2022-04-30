@@ -17,6 +17,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ProfileComponent } from './profile/profile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PostComponent } from './post/post.component';
+import { FeedComponent } from './feed/feed.component';
+import { PostDisplayComponent } from './post-display/post-display.component';
+import { TruncatePipe } from 'src/truncate.pipe';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,10 @@ import { PostComponent } from './post/post.component';
     NavbarComponent,
     ProfileComponent,
     DashboardComponent,
-    PostComponent
+    PostComponent,
+    FeedComponent,
+    PostDisplayComponent,
+    TruncatePipe
   ],
   imports: [
     BrowserModule,

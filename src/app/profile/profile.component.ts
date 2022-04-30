@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FirebaseAuthService } from '../firebase-auth.service';
+import { User } from '../Models/User';
 
 @Component({
   selector: 'app-profile',
@@ -9,16 +10,24 @@ import { FirebaseAuthService } from '../firebase-auth.service';
 })
 export class ProfileComponent implements OnInit {
 
-  profileUser: any;
+  profileUser: User ;
   isMine: boolean = true;
 
   constructor(public auth: FirebaseAuthService, public router: Router) { 
-    // this.isMine = this.router.getCurrentNavigation()?.extras.state;
+    this.profileUser = this.auth.getUserAsUser();
 
-    console.log(this.isMine)
+    if (this.router.getCurrentNavigation()?.extras.state) {
+      var routeState = this.router.getCurrentNavigation()?.extras.state;
+      if (routeState) {
+        this.profileUser = routeState['user'] ? routeState['user'] : '';
+        this.isMine = false;
+      }
+    }
   }
+  
 
   ngOnInit(): void {
+
   }
 
 }

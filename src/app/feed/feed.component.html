@@ -1,0 +1,12 @@
+
+
+<div *ngIf="posts.length > 0; else noPosts" class="container">
+    <app-post-display *ngFor="let post of posts" [data-name]="getUsername(post.userID)" 
+    [data-message]="post.description" [data-title]="post.title" [data-time]="post.date">
+    </app-post-display>
+
+</div>
+
+<ng-template #noPosts>
+    No Posts
+</ng-template>

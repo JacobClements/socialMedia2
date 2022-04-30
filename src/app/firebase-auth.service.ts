@@ -29,6 +29,18 @@ export class FirebaseAuthService {
   usersCollection: AngularFirestoreCollection<User> | undefined;
 
 
+  getUserAsUser(){
+    var UserAsUser: User = {
+      displayName: this.user.displayName,
+      phoneNumber: this.user.phoneNumber,
+      profileURL: this.user.photoURL,
+      uid: this.user.uid,
+      email: this.user.email
+    }
+
+    return UserAsUser;
+  }
+
   async signInWithEmailAndPassword(email: string, password: string){
     await this.firebaseAuth.signInWithEmailAndPassword(email, password).then(res => {
       console.log("Logged in:" + res.user);
@@ -38,15 +50,16 @@ export class FirebaseAuthService {
   }
 
   async signUp(email: string, password: string, name: string){
+    console.log(name)
     await this.firebaseAuth.createUserWithEmailAndPassword(email, password).then( res => {
-      console.log("User created: " + res.user);
+      
       this.isLoggedIn = true;
 
       res.user?.updateProfile({
         displayName: name
       })
       
-      if(res.user != null) this.addUserToFirestore(res?.user);
+      if(res.user != null) this.addUserToFirestore(res?.user, name);
     })
   }
 
@@ -55,12 +68,14 @@ export class FirebaseAuthService {
     this.isLoggedIn = false;
   }
 
-  addUserToFirestore(user: firebase.default.User){
-    if (user.displayName != null && user.email != null){
+  addUserToFirestore(user: firebase.default.User, name: string){
+    console.log("adding time" + user.displayName +"    " + user.email)
+    if (name != null && user.email != null){
       this.usersCollection?.doc(user.uid).set({
-        displayName: user.displayName,
+        displayName: name,
         email: user.email,
-        profileURL: "",
+        profileURL: user.photoURL ? user.photoURL : "",
+        phoneNumber: user.phoneNumber ? user.phoneNumber : ""
     })
     }
 

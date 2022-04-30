@@ -1,0 +1,77 @@
+.card {
+    width: auto;
+    margin: 1rem;
+    
+}
+
+header {
+    padding: 1rem;
+    display: flex;
+}
+
+header .left-header {
+    display: flex;
+    width: auto;
+}
+
+header img {
+    border-radius: 50%;
+    height: 3rem;
+    width: 3rem;
+    margin: 1rem;
+    border: black 1px solid;
+}
+
+header .text {
+    margin-top: 1rem;
+}
+
+
+.right-header{
+    width: 80%;
+    text-align: right;
+    margin: 1rem;
+}
+
+.body {
+    max-height: 250px;
+    overflow: hidden;
+    padding: 1rem;
+}
+
+
+.follow-base {
+    position: relative;
+    font-size: 10pt;
+    border: 1px solid;
+    border-radius: 3px;
+    width: 85px;
+    height: 30px;
+    cursor: hand;	   
+    transition: background-color ease-in-out 100ms;
+    justify-content: right;
+}
+
+.follow {
+    color: #3399FF;
+    background-color: #ffffff;
+    border-color: #3399FF;
+}
+
+.follow:hover {
+    background-color: #3399FF;
+    color: white;
+}
+
+.following {
+    color: white;
+    border-color: #2EB82E;
+    background-color: #2EB82E;
+    position: relative;
+    font-size: 10pt;
+    border: 1px solid;
+    border-radius: 3px;
+    width: 85px;
+    height: 30px;
+    cursor: hand;
+}

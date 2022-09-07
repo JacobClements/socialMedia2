@@ -18,10 +18,10 @@
        
     </header>
     <hr>
-    <div class="body">
+    <div class="body" (click)="showAll = !showAll">
 
         <h3 class="title">{{title}}</h3>
-        <div class="message"> {{message | truncate:250}}</div>
+        <div class="message" > {{showAll ? message : message | truncate:250}}</div>
     </div>
     
     <hr>

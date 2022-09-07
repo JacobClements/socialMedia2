@@ -20,6 +20,8 @@ import { PostComponent } from './post/post.component';
 import { FeedComponent } from './feed/feed.component';
 import { PostDisplayComponent } from './post-display/post-display.component';
 import { TruncatePipe } from 'src/truncate.pipe';
+import { UserCardComponent } from './user-card/user-card.component';
+import { ProfileDisplayComponent } from './profile-display/profile-display.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { TruncatePipe } from 'src/truncate.pipe';
     PostComponent,
     FeedComponent,
     PostDisplayComponent,
-    TruncatePipe
+    TruncatePipe,
+    UserCardComponent,
+    ProfileDisplayComponent
   ],
   imports: [
     BrowserModule,

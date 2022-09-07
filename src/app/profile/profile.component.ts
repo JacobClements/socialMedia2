@@ -10,24 +10,28 @@ import { User } from '../Models/User';
 })
 export class ProfileComponent implements OnInit {
 
-  profileUser: User ;
+  profileUser: User | any;
   isMine: boolean = true;
 
-  constructor(public auth: FirebaseAuthService, public router: Router) { 
-    this.profileUser = this.auth.getUserAsUser();
-
-    if (this.router.getCurrentNavigation()?.extras.state) {
-      var routeState = this.router.getCurrentNavigation()?.extras.state;
-      if (routeState) {
-        this.profileUser = routeState['user'] ? routeState['user'] : '';
-        this.isMine = false;
-      }
-    }
-  }
+  constructor(public auth: FirebaseAuthService, public router: Router) { }
+    
   
 
   ngOnInit(): void {
-
+    // if (localStorage.getItem('user') != null && localStorage.getItem('user') != ''){
+    //   this.profileUser = JSON.parse(localStorage.getItem('user') || 'null');
+    // } else {
+    //   window.alert("You need to log in. Briging you to login page");
+    //   this.router.navigate(['']);
+    // }
+    
+    if (history.state.user) {
+      this.profileUser = history.state.user;
+    } else {
+      window.alert("You need to log in. Briging you to login page");
+      this.router.navigate(['']);
+    }
+  
   }
 
 }

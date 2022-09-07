@@ -5,13 +5,13 @@ import { Post } from '../Models/Post';
 import { User } from '../Models/User';
 import { PostService } from '../post.service';
 import { UserService } from '../user.service';
-
 @Component({
-  selector: 'app-feed',
-  templateUrl: './feed.component.html',
-  styleUrls: ['./feed.component.css']
+  selector: 'app-profile-display',
+  templateUrl: './profile-display.component.html',
+  styleUrls: ['./profile-display.component.css']
 })
-export class FeedComponent implements OnInit {
+export class ProfileDisplayComponent implements OnInit {
+
   posts: Post[] = [];
   users: User[] = [];
   followerID: any[] = [];
@@ -31,38 +31,5 @@ export class FeedComponent implements OnInit {
       this.followerID = x;
     })
   }
-
-  isFollower(userID?: string): boolean{
-    var follow = false;
-    if (userID) {
-      this.followerID.forEach(id => {
-        if (id.id == userID){
-          follow = true;
-        }
-      })
-      
-    }
-    return follow
-  }
-
-  removePost(post: Post){
-    this.postService.deletePost(post);
-  }
-
-  goToUserProfile(user: User){
-    this.Router.navigate(['profile'], {state: {user: user}})
-  }
-
-  getUsername(userID: any): string {
-    var username: string = "";
-    this.users.forEach(user => {
-      if (user.uid == (userID as string).trim()){
-        username = user.displayName;
-      }
-    })
-
-    return username;
-  }
-
 
 }

@@ -17,7 +17,10 @@ export class DashboardComponent implements OnInit {
   constructor(private postService: PostService, private userService: UserService, private Router: Router) { }
 
   ngOnInit(): void {
-
+    if (localStorage.getItem('user') == null || localStorage.getItem('user') == ''){
+      window.alert("Looks like you have not signed in.")
+      this.Router.navigate(['']);
+    }
     
   }
 

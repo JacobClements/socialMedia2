@@ -34,8 +34,7 @@ header .text {
 }
 
 .body {
-    max-height: 250px;
-    overflow: hidden;
+
     padding: 1rem;
 }
 

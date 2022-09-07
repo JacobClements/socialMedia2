@@ -1,7 +1,7 @@
 
 
 <div *ngIf="posts.length > 0; else noPosts" class="container">
-    <app-post-display *ngFor="let post of posts" [data-name]="getUsername(post.userID)" 
+    <app-post-display *ngFor="let post of posts" [data-userID]="post.userID" [data-follower]="isFollower(post.userID)" [data-name]="getUsername(post.userID)" 
     [data-message]="post.description" [data-title]="post.title" [data-time]="post.date">
     </app-post-display>
 

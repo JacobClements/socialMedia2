@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FirebaseAuthService } from '../firebase-auth.service';
 
 @Component({
   selector: 'app-post-display',
@@ -11,15 +12,27 @@ export class PostDisplayComponent implements OnInit {
   @Input("data-title") title: string | undefined;
   @Input("data-time") date:string|undefined;
   @Input("data-message") message: string | undefined;
+  @Input("data-follower") following: boolean | undefined;
+  @Input('data-userID') userID: string | undefined;
 
-  following: boolean = false;
+  
+  showAll: boolean = false;
 
   onFollowPressed(){
+    if (this.userID){
+      if (this.following){
+        this.auth.removeFollower(this.userID);
+      } else {
+        this.auth.addFollower(this.userID);
+      }
+    }
+
     this.following = !this.following;
+    
   }
 
 
-  constructor() { }
+  constructor(private auth: FirebaseAuthService) { }
 
   ngOnInit(): void {
   }
